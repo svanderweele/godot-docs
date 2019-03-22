@@ -345,9 +345,9 @@ Choosing animations
 
 Now that the player can move, we need to change which animation the
 AnimatedSprite is playing based on direction. We have a "right"
-animation, which should be flipped horizontally using the ``flip_h``
-property for left movement, and an "up" animation, which should be
-flipped vertically with ``flip_v`` for downward movement.
+animation, which should be flipped horizontally using the ``set_flip_h``
+property setter for left movement, and an "up" animation, which should be
+flipped vertically with ``set_flip_v`` for downward movement.
 Let's place this code at the end of our ``_process()`` function:
 
 .. tabs::
@@ -355,12 +355,12 @@ Let's place this code at the end of our ``_process()`` function:
 
         if velocity.x != 0:
             $AnimatedSprite.animation = "right"
-            $AnimatedSprite.flip_v = false
+            $AnimatedSprite.set_flip_v(false)
             # See the note below about boolean assignment
-            $AnimatedSprite.flip_h = velocity.x < 0
+            $AnimatedSprite.set_flip_h(velocity.x < 0)
         elif velocity.y != 0:
             $AnimatedSprite.animation = "up"
-            $AnimatedSprite.flip_v = velocity.y > 0
+            $AnimatedSprite.set_flip_v(velocity.y > 0)
 
  .. code-tab:: csharp
 
@@ -385,16 +385,16 @@ Let's place this code at the end of our ``_process()`` function:
            .. code-tab :: gdscript GDScript
 
              if velocity.x < 0:
-                 $AnimatedSprite.flip_h = true
+                 $AnimatedSprite.set_flip_h(true)
              else:
-                 $AnimatedSprite.flip_h = false
+                 $AnimatedSprite.set_flip_h(false)
 
            .. code-tab:: csharp
 
              if velocity.x < 0:
-                 animatedSprite.FlipH = true
+                 animatedSprite.SetFlipH = true
              else:
-                 animatedSprite.FlipH = false
+                 animatedSprite.SetFlipH = false
 
 Play the scene again and check that the animations are correct in each
 of the directions. When you're sure the movement is working correctly,
